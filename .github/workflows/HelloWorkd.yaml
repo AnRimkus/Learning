@@ -10,3 +10,8 @@ jobs:
     steps:
     - name: Echo Hello World
       run: echo "Hello World"
+
+    - name: test this world
+      #run: |
+      #  ls ./.github/workflows/
+      uses: ./.github/workflows/Test.yaml
