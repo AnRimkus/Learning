@@ -11,6 +11,9 @@ jobs:
     - name: Echo Hello World
       run: echo "Hello World"
 
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
     - name: Show existing workflows
       run: |
         ls ./.github/workflows/
