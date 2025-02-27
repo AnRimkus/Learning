@@ -3,5 +3,5 @@ on:
   workflow_dispatch:
 
 jobs:
-   test this world:
+   test-this-world:
       uses: ./.github/workflows/Test.yaml
