@@ -1,0 +1,12 @@
+name: Test feature
+
+on:
+  workflow_call:
+
+jobs:
+  test_feature_world_job:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Echo Test this World from feature branch
+      run: echo "Test this World from feature branch"
