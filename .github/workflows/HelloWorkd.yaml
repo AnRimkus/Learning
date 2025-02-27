@@ -11,7 +11,9 @@ jobs:
     - name: Echo Hello World
       run: echo "Hello World"
 
+    - name: Show existing workflows
+      run: |
+        ls ./.github/workflows/
+
     - name: test this world
-      #run: |
-      #  ls ./.github/workflows/
       uses: ./.github/workflows/Test.yaml
