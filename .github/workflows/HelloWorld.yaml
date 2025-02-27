@@ -20,4 +20,4 @@ jobs:
 
     - name: test this world
       #uses: ./.github/workflows/Test.yaml
-      uses: ../.github/workflows/Test.yaml
+      uses: ./.github/workflows/Test.yaml
