@@ -3,7 +3,14 @@ on:
   workflow_dispatch:
 
 jobs:
-    test-this-world:
-      uses: ./.github/workflows/Test.yaml
-    test-this-world-feature:
-      uses: ./.github/workflows/TestFeature.yaml
+  test-this-world:
+    uses: ./.github/workflows/Test.yaml
+  test-this-world-feature:
+    uses: ./.github/workflows/TestFeature.yaml
+
+  additional-steps:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Echo Additional Step
+      run: echo "This is output from a step"
