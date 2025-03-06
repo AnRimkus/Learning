@@ -1,0 +1,29 @@
+name: Upgrade AKS Cluster
+
+on:
+  workflow_dispatch:
+  #schedule:
+  #  - cron: '0 2 * * 6'
+
+#env:
+#  CLUSTER_RESOURCE_GROUP: 
+#  CLUSTER_NAME: 
+
+jobs:
+  upgrade-aks-cluster:
+    permissions:
+      id-token: write
+      contents: read
+      actions: read
+    runs-on: ubuntu-latest
+    #environment: testk8
+    steps:
+      - name: Azure login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
+      - name: Show resource group
+        run: az group list --output table
