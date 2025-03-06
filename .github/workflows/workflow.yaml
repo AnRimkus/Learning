@@ -40,6 +40,7 @@ jobs:
       run: echo "The value from the file is ${{ steps.read_file.outputs.file_content }}"
 
   edit-file:
+    needs: read-file
     permissions:
       id-token: write
       contents: write
@@ -57,7 +58,7 @@ jobs:
     - name: Mount file share
       run: |
         mkdir -p /home/runner/fileshare
-        sudo mount -t cifs //azcopytest20250116.file.core.windows.net/githublearning /home/runner/fileshare -o username=${{ secrets.FS_USERNAME }},password=${{ secrets.FS_PASSWORD }}
+        sudo mount -t cifs //azcopytest20250116.file.core.windows.net/githublearning /home/runner/fileshare -o username=${{ secrets.FS_USERNAME }},password=${{ secrets.FS_PASSWORD }},file_mode=0777,dir_mode=0777
 
     - name: Write value to file
       run: |
