@@ -10,7 +10,7 @@ on:
 #  CLUSTER_NAME: 
 
 jobs:
-  upgrade-aks-cluster:
+  read-file:
     permissions:
       id-token: write
       contents: read
@@ -21,13 +21,6 @@ jobs:
     - uses: azure/login@v2
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-    - name: Azure CLI script
-      uses: azure/cli@v2
-      with:
-        azcliversion: latest
-        inlineScript: |
-          az account show
 
     - name: Install cifs-utils
       run: sudo apt-get install cifs-utils
@@ -45,3 +38,30 @@ jobs:
 
     - name: Use the value
       run: echo "The value from the file is ${{ steps.read_file.outputs.file_content }}"
+
+  edit-file:
+    permissions:
+      id-token: write
+      contents: write
+      actions: write
+    runs-on: ubuntu-latest
+    environment: testk8
+    steps:
+    - uses: azure/login@v2
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Install cifs-utils
+      run: sudo apt-get install cifs-utils
+
+    - name: Mount file share
+      run: |
+        mkdir -p /home/runner/fileshare
+        sudo mount -t cifs //azcopytest20250116.file.core.windows.net/githublearning /home/runner/fileshare -o username=${{ secrets.FS_USERNAME }},password=${{ secrets.FS_PASSWORD }}
+
+    - name: Write value to file
+      run: |
+        echo "Approved" > /home/runner/fileshare/approval.txt
+
+    - name: List files in file share
+      run: ls /home/runner/fileshare
