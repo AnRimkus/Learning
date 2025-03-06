@@ -34,13 +34,13 @@ jobs:
 
     - name: Mount file share
       run: |
-        mkdir -p /mnt/fileshare
-        sudo mount -t cifs https://azcopytest20250116.file.core.windows.net/githublearning /mnt/fileshare -o username=${{ secrets.FS_USERNAME }},password=${{ secrets.FS_PASSWORD }}
+        mkdir -p /home/runner/fileshare
+        sudo mount -t cifs https://azcopytest20250116.file.core.windows.net/githublearning /home/runner/fileshare -o username=${{ secrets.FS_USERNAME }},password=${{ secrets.FS_PASSWORD }}
 
     - name: Read value from file
       id: read_file
       run: |
-        FILE_CONTENT=$(cat /mnt/fileshare/approval.txt)
+        FILE_CONTENT=$(cat /home/runner/fileshare/approval.txt)
         echo "::set-output name=file_content::$FILE_CONTENT"
 
     - name: Use the value
